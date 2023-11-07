@@ -1,4 +1,10 @@
+import Wrapper from '../assets/wrappers/SmallSidebar';
+
 const SmallSidebar = () => {
-  return <div>SmallSidebar</div>;
+  return (
+    <Wrapper>
+      <h1>SmallSidebar</h1>
+    </Wrapper>
+  );
 };
 export default SmallSidebar;
