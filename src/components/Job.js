@@ -4,6 +4,7 @@ import Wrapper from '../assets/wrappers/Job';
 import { useDispatch } from 'react-redux';
 import JobInfo from './JobInfo';
 import moment from 'moment/moment';
+import { deleteJob } from '../features/job/jobSlice';
 
 const Job = ({
   _id,
@@ -46,7 +47,7 @@ const Job = ({
             </Link>
             <button
               className="btn delete-btn"
-              onClick={() => console.log('delete job')}
+              onClick={() => dispatch(deleteJob(_id))}
             >
               delete
             </button>
