@@ -28,11 +28,11 @@ export const createJob = createAsyncThunk(
         },
       });
       thunkAPI.dispatch(clearValues());
-      return resp.data;
+      return resp.data.msg;
     } catch (error) {
       if (error.response.status === 401) {
         thunkAPI.dispatch(logoutUser());
-        return thunkAPI.rejectWithValue('Unauthorized user, logging out');
+        return thunkAPI.rejectWithValue('Unauthorized! Logging Out...');
       }
       return thunkAPI.rejectWithValue(error.response.data.msg);
     }
@@ -71,6 +71,9 @@ const jobSlice = createSlice({
         jobLocation: getUserFromLocalStorage()?.location || '',
       };
     },
+    setEditJob: (state, { payload }) => {
+      return { ...state, isEditing: true, ...payload };
+    },
   },
   extraReducers: {
     [createJob.pending]: (state) => {
@@ -78,7 +81,7 @@ const jobSlice = createSlice({
     },
     [createJob.fulfilled]: (state) => {
       state.isLoading = false;
-      toast.success('Job Added');
+      toast.success('Job Created');
     },
     [createJob.rejected]: (state, { payload }) => {
       state.isLoading = false;
@@ -93,6 +96,6 @@ const jobSlice = createSlice({
   },
 });
 
-export const { handleChange, clearValues } = jobSlice.actions;
+export const { handleChange, clearValues, setEditJob } = jobSlice.actions;
 
 export default jobSlice.reducer;

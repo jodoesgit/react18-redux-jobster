@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { UseSelector, useSelector } from 'react-redux/es/hooks/useSelector';
+import { useSelector } from 'react-redux/es/hooks/useSelector';
 
 const ProtectedRoute = ({ children }) => {
   const { user } = useSelector((store) => store.user);

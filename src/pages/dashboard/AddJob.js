@@ -8,7 +8,6 @@ import {
   createJob,
 } from '../../features/job/jobSlice';
 import { useEffect } from 'react';
-
 const AddJob = () => {
   const {
     isLoading,
@@ -24,7 +23,6 @@ const AddJob = () => {
   } = useSelector((store) => store.job);
   const { user } = useSelector((store) => store.user);
   const dispatch = useDispatch();
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -42,49 +40,51 @@ const AddJob = () => {
   };
 
   useEffect(() => {
-    dispatch(
-      handleChange({
-        name: 'jobLocation',
-        value: user.location,
-      })
-    );
-  });
+    if (!isEditing) {
+      dispatch(
+        handleChange({
+          name: 'jobLocation',
+          value: user.location,
+        })
+      );
+    }
+  }, []);
 
   return (
     <Wrapper>
       <form className="form">
         <h3>{isEditing ? 'edit job' : 'add job'}</h3>
         <div className="form-center">
-          {/* Position */}
+          {/* position */}
           <FormRow
             type="text"
             name="position"
             value={position}
             handleChange={handleJobInput}
           />
-          {/* Company */}
+          {/* company */}
           <FormRow
             type="text"
             name="company"
             value={company}
             handleChange={handleJobInput}
           />
-          {/* Location */}
+          {/* jobLocation */}
           <FormRow
             type="text"
             name="jobLocation"
-            labelText="Job Location"
+            labelText="job location"
             value={jobLocation}
             handleChange={handleJobInput}
           />
-          {/* Status */}
+          {/* status */}
           <FormRowSelect
             name="status"
             value={status}
             handleChange={handleJobInput}
             list={statusOptions}
           />
-          {/* Type */}
+          {/* job type*/}
           <FormRowSelect
             name="jobType"
             labelText="job type"
